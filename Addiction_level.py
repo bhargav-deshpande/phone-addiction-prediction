@@ -12,10 +12,10 @@ import warnings
 warnings.filterwarnings('ignore')
 
 df=pd.read_csv("teen_phone_addiction_dataset.csv")
-print(df.shape)
-print(df.info())
-print(df.describe())
-print(df.isnull().sum())
+# print(df.shape)
+# print(df.info())
+# print(df.describe())
+# print(df.isnull().sum())
 
 # sns.histplot(df['Addiction_Level'],bins=50,kde=True)
 # plt.figure(figsize=(15,10))
@@ -50,28 +50,30 @@ scaler=StandardScaler()
 x_train_lr[numeric_col]=scaler.fit_transform(x_train_lr[numeric_col])
 x_test_lr[numeric_col]=scaler.transform(x_test_lr[numeric_col])
 
-model_lr=LinearRegression()
-model_lr.fit(x_train_lr,y_train)
-y_pred_lr=model_lr.predict(x_test_lr)
-r2=r2_score(y_test,y_pred_lr)
-n=x_test.shape[0]
-p=x_test.shape[1]
-adjusted_r2=1-((1-r2)*(n-1)/(n-p-1))
-mae_lr=mean_absolute_error(y_test,y_pred_lr)
-rmse_lr=np.sqrt(mean_squared_error(y_test,y_pred_lr))
-print("R2: ",adjusted_r2,"\nMAE: ",mae_lr,"\nRMSE: ",rmse_lr)
+# model_lr=LinearRegression()
+# model_lr.fit(x_train_lr,y_train)
+# y_pred_lr=model_lr.predict(x_test_lr)
+# r2=r2_score(y_test,y_pred_lr)
+# n=x_test.shape[0]
+# p=x_test.shape[1]
+# adjusted_r2=1-((1-r2)*(n-1)/(n-p-1))
+# mae_lr=mean_absolute_error(y_test,y_pred_lr)
+# rmse_lr=np.sqrt(mean_squared_error(y_test,y_pred_lr))
+# print("Linear Regression Analysis:")
+# print("R2: ",adjusted_r2,"\nMAE: ",mae_lr,"\nRMSE: ",rmse_lr)
 
-model_rf=RandomForestRegressor(
-    n_estimators=100,
-    max_depth=None,
-    random_state=42
-)
-model_rf.fit(x_train,y_train)
-y_pred_rf=model_rf.predict(x_test)
-r2_rf=r2_score(y_test,y_pred_rf)
-mae=mean_absolute_error(y_test,y_pred_rf)
-rmse=np.sqrt(mean_squared_error(y_test,y_pred_rf))
-print("R2: ",r2_rf,"\nMAE: ",mae,"\nRMSE: ",rmse)
+# model_rf=RandomForestRegressor(
+#     n_estimators=100,
+#     max_depth=None,
+#     random_state=42
+# )
+# model_rf.fit(x_train,y_train)
+# y_pred_rf=model_rf.predict(x_test)
+# r2_rf=r2_score(y_test,y_pred_rf)
+# mae=mean_absolute_error(y_test,y_pred_rf)
+# rmse=np.sqrt(mean_squared_error(y_test,y_pred_rf))
+# print("\nRandom Forest Analysis:")
+# print("R2: ",r2_rf,"\nMAE: ",mae,"\nRMSE: ",rmse)
 
 model_xgb=XGBRegressor(n_estimators=100,learning_rate=0.1,max_depth=3,
                         eval_metric='rmse',random_state=42)
@@ -80,4 +82,5 @@ y_pred_xgb=model_xgb.predict(x_test)
 r2_xgb=r2_score(y_test,y_pred_xgb)
 mae_xgb=mean_absolute_error(y_test,y_pred_xgb)
 rmse_xgb=np.sqrt(mean_squared_error(y_test,y_pred_xgb))
+print("\nXGB Regressor Analysis:")
 print("R2: ",r2_xgb,"\nMAE: ",mae_xgb,"\nRMSE: ",rmse_xgb)
