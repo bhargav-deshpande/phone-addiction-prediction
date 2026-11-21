@@ -35,6 +35,18 @@ The following regression algorithms were implemented:
 - Random Forest Regressor
 - XGBoost Regressor
 
+## 📈 Model Performance
+
+The regression models were evaluated using the following metrics:
+
+- R² Score
+- Mean Absolute Error (MAE)
+- Root Mean Squared Error (RMSE)
+
+### Model Evaluation Results
+
+![Model Performance](model_performance.png)
+
 ## 📊 Features Used
 
 The prediction considers multiple factors, including:
